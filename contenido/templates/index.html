@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es-PE" ng-app="home">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>informaTIpedia</title>
+        {% load staticfiles %}
+        <link href="{% static 'css/icon.css' %}" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    </head>
+    <body>
+        <ul class="collection with-header">
+            <li class="collection-header"><h4>TÓPICOS</h4></li>
+        </ul>
+        <div class="collection" ng-controller="homeCtrl">
+           {% for topico in topicos %}
+           <a href="#" ng-class="{{topico.id}} == selectedIndex ? 'collection-item active' : 'collection-item'" ng-click="itemClicked({{topico.id}})">{{topico}}</a>
+           {% endfor %}
+        </div>
+        <script type="text/javascript" src="{% static 'js/jquery-2.1.1.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/controllers.js' %}"></script>
+    </body>
+</html>
