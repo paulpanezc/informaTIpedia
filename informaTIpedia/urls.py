@@ -20,4 +20,6 @@ from contenido.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', HomePageView.as_view()),
+    url(r'^api/temas/', API().tasks_json),
+    url(r'^api/subtemas/', API().tasks_json1),
 ]

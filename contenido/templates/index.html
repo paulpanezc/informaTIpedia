@@ -5,16 +5,36 @@
         <title>informaTIpedia</title>
         {% load staticfiles %}
         <link href="{% static 'css/icon.css' %}" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection"/>
     </head>
-    <body>
-        <ul class="collection with-header">
+    <body ng-controller="homeCtrl">
+        <ul>
             <li class="collection-header"><h4>TÓPICOS</h4></li>
         </ul>
-        <div class="collection" ng-controller="homeCtrl">
+        <div class="collection">
            {% for topico in topicos %}
-           <a href="#" ng-class="{{topico.id}} == selectedIndex ? 'collection-item active' : 'collection-item'" ng-click="itemClicked({{topico.id}})">{{topico}}</a>
+           <a href="#" ng-class="{{topico.id}} == selectedIndex ? 'collection-item active' : 'collection-item'"
+              ng-click="itemClicked({{topico.id}})">
+               {{topico}}
+           </a>
            {% endfor %}
+        </div>
+        <ul>
+            <li class="collection-header"><h4>TEMAS</h4></li>
+        </ul>
+        <div class="collection">
+           <a href="#" ng-repeat="tema in temas" ng-class="tema.pk == selectedIndex1 ? 'collection-item active' : 'collection-item'"
+              ng-click="itemClicked1(tema.pk)">
+               {% verbatim %}{{tema.fields.nombre}}{% endverbatim %}
+           </a>
+        </div>
+        <ul>
+            <li class="collection-header"><h4>SUB-TEMAS</h4></li>
+        </ul>
+        <div class="collection">
+           <a href="#" class="collection-item" ng-repeat="subtema in subtemas">
+               {% verbatim %}{{subtema.fields.nombre}}{% endverbatim %}
+           </a>
         </div>
         <script type="text/javascript" src="{% static 'js/jquery-2.1.1.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
