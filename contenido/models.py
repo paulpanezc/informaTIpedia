@@ -19,6 +19,7 @@ class Tema(models.Model):
 class SubTema(models.Model):
     nombre = models.CharField(max_length = 45, unique = True)
     tema = models.ForeignKey(Tema)
+    imagen = models.ImageField(max_length=999, blank=True, null=True, upload_to='img')
 
     def __str__(self):
         return self.nombre

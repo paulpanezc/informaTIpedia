@@ -17,12 +17,12 @@ class HomePageView(TemplateView):
 
 class API():
 
-    def tasks_json(self, request):
-        temas = Tema.objects.filter(topico_id = request.GET['id'])
+    def get_temas(self, request):
+        temas = Tema.objects.filter(topico_id = request.GET['id']).order_by('nombre')
         data = serializers.serialize("json", temas)
         return HttpResponse(data, content_type='application/json')
 
-    def tasks_json1(self, request):
-        subtemas = SubTema.objects.filter(tema_id = request.GET['id'])
+    def get_subtemas(self, request):
+        subtemas = SubTema.objects.filter(tema_id = request.GET['id']).order_by('nombre')
         data = serializers.serialize("json", subtemas)
         return HttpResponse(data, content_type='application/json')

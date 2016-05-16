@@ -8,34 +8,75 @@
         <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection"/>
     </head>
     <body ng-controller="homeCtrl">
-        <ul>
-            <li class="collection-header"><h4>TÓPICOS</h4></li>
-        </ul>
-        <div class="collection">
-           {% for topico in topicos %}
-           <a href="#" ng-class="{{topico.id}} == selectedIndex ? 'collection-item active' : 'collection-item'"
-              ng-click="itemClicked({{topico.id}})">
-               {{topico}}
-           </a>
-           {% endfor %}
-        </div>
-        <ul>
-            <li class="collection-header"><h4>TEMAS</h4></li>
-        </ul>
-        <div class="collection">
-           <a href="#" ng-repeat="tema in temas" ng-class="tema.pk == selectedIndex1 ? 'collection-item active' : 'collection-item'"
-              ng-click="itemClicked1(tema.pk)">
-               {% verbatim %}{{tema.fields.nombre}}{% endverbatim %}
-           </a>
-        </div>
-        <ul>
-            <li class="collection-header"><h4>SUB-TEMAS</h4></li>
-        </ul>
-        <div class="collection">
-           <a href="#" class="collection-item" ng-repeat="subtema in subtemas">
-               {% verbatim %}{{subtema.fields.nombre}}{% endverbatim %}
-           </a>
-        </div>
+        <header>
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo">informaTIpedia</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li>
+                            <form>
+                                <div class="input-field">
+                                    <input id="search" type="search" required>
+                                    <label for="search"><i class="material-icons">search</i></label>
+                                    <i class="material-icons">close</i>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div class="row">
+                <div class="col s4">
+                    <ul>
+                        <li class="collection-header"><h4>TÓPICOS</h4></li>
+                    </ul>
+                    <div class="collection">
+                       {% for topico in topicos %}
+                       <a href="#" ng-class="{{topico.id}} == selectedIndex ? 'collection-item active' : 'collection-item'"
+                          ng-click="itemClicked({{topico.id}})">
+                           {{topico}}
+                       </a>
+                       {% endfor %}
+                    </div>
+                </div>
+                <div ng-hide="contenido">
+                    <div class="col s4">
+                        <ul>
+                            <li class="collection-header"><h4>TEMAS</h4></li>
+                        </ul>
+                        <div class="collection">
+                           <a href="#" ng-repeat="tema in temas" ng-class="tema.pk == selectedIndex1 ? 'collection-item active' : 'collection-item'"
+                              ng-click="itemClicked1(tema.pk)">
+                               {% verbatim %}{{tema.fields.nombre}}{% endverbatim %}
+                           </a>
+                        </div>
+                    </div>
+                    <div class="col s4">
+                        <ul>
+                            <li class="collection-header"><h4>SUB-TEMAS</h4></li>
+                        </ul>
+                        <div class="collection">
+                           <a href="#" ng-repeat="subtema in subtemas" ng-class="subtema.pk == selectedIndex2 ? 'collection-item active' : 'collection-item'"
+                              ng-click="itemClicked2(subtema.pk, subtema.fields.nombre, subtema.fields.imagen)">
+                               {% verbatim %}{{subtema.fields.nombre}}{% endverbatim %}
+                           </a>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="contenido">
+                    <div class="col s8">
+                        <h1>{% verbatim %}{{titulo}}{% endverbatim %}</h1>
+                        <div class="row">
+                            <div class="col s12">
+                                <img ng-if="ruta_imagen.length > 0" class="responsive-img" src="{{MEDIA_URL}}{% verbatim %}{{ruta_imagen}}{% endverbatim %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
         <script type="text/javascript" src="{% static 'js/jquery-2.1.1.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/angular.min.js' %}"></script>
